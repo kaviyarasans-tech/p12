@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduBridge - Connecting Learners and Mentors</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #eef2ff; color: #1e2a4a; margin: 0; }
+        header { background-color: #1e2a4a; color: #8fd3ff; text-align: center; padding: 20px; }
+        nav { background-color: #4f6bed; padding: 15px; text-align: center; }
+        nav a { color: white; margin: 15px; text-decoration: none; font-weight: bold; }
+        section { background-color: white; margin: 20px; padding: 20px; border-radius: 8px; }
+        h2 { color: #3b4cca; }
+        input, textarea { width: 90%; padding: 10px; margin: 10px; }
+        button { background-color: #4f6bed; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #3646b5; }
+        footer { background-color: #1e2a4a; color: #8fd3ff; text-align: center; padding: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EDUBRIDGE</h1>
+        <p>Bridging the Gap Between Learners and Knowledge</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#resources">Study Resources</a>
+    </nav>
+
+    <section id="home">
+        <h2>Welcome to EduBridge</h2>
+        <p>
+            EduBridge helps students find quality learning material, connect
+            with mentors and stay motivated together.
+        </p>
+    </section>
+
+    <section id="features">
+        <h2>Features</h2>
+
+        <h3>Live Classes</h3>
+        <p>Lets students attend sessions with teachers and ask questions in real time.</p>
+
+        <h3>Mentor Community</h3>
+        <p>Lets members join study groups and share learning tips.</p>
+
+        <h3>Progress Insights</h3>
+        <p>Turns learning activity into simple weekly summaries.</p>
+    </section>
+
+    <section id="resources">
+        <h2>Learning Resource Management</h2>
+
+        <h3>Latest Study Resource</h3>
+        <button onclick="loadData()">Load Resource</button>
+        <p id="result"></p>
+
+        <h3>Share a Study Resource</h3>
+        <input type="text" id="name" placeholder="Resource Title">
+        <input type="text" id="member" placeholder="Student Name">
+        <textarea id="description" placeholder="Resource Description"></textarea>
+        <button onclick="submitData()">Share Resource</button>
+        <p id="message"></p>
+    </section>
+
+    <footer>
+        <p>© 2026 EduBridge | Learning Together</p>
+    </footer>
+
+    <script>
+        // 1. JavaScript Function
+        function loadData() {
+            // 2. API Call
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent = "Study Resource: " + data.title;
+                console.log(data);
+            })
+            .catch(error => {
+                document.getElementById("result").textContent = "Could not load the resource. Check your connection and try again.";
+                console.log("Error:", error);
+            });
+        }
+
+        // 3. Input Validation
+        function submitData() {
+            let name = document.getElementById("name").value;
+            let member = document.getElementById("member").value;
+            let description = document.getElementById("description").value;
+
+            // 4. Test and Debugging
+            if (name.trim() == "" || member.trim() == "" || description.trim() == "") {
+                document.getElementById("message").textContent = "Please fill all the fields.";
+                return;
+            }
+
+            document.getElementById("message").textContent = "Study resource shared with EduBridge!";
+            console.log("Study resource submitted");
+        }
+    </script>
+</body>
+</html>
